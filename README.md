@@ -13,9 +13,9 @@ Do backup of your MAC OS to Proxmox Backup Server
     - /Volumes/Data/work/another-python:/backup
 - backup-mac-to-pbs.sh line #22 to #25 shwon below by assigning the proper values:
   if you don't know how to then follow Proxmox documentation: https://pbs.proxmox.com/docs/backup-client.html
-    export PBS_REPOSITORY=
+    ```export PBS_REPOSITORY=
     export PBS_PASSWORD=
-    export PBS_FINGERPRINT=
+    export PBS_FINGERPRINT=```
 - using terminal CD to that folder run the following command
     docker compose up -d --force-recreate
 
