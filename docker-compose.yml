@@ -1,0 +1,26 @@
+# Notes:
+#   1. To (force) create and this container do: docker compose up -d --force-recreate
+
+services:
+  backup-mac-to-pbs:
+    container_name: backup-mac-to-pbs
+    image: ayufan/proxmox-backup-server:${TAG:-latest}
+    ports:
+      - 8007:8007
+    mem_limit: 2G
+    volumes:
+      # update this line (left side only) per your need to the folder on your MAC you want to backup
+      - /Volumes/Data/work/another-python:/backup
+      # below lines need not to be changed
+      - ./data/custom_cronjobs:/home/custom_cronjobs # this folder has a bash script and it will be called by cronjob
+      - ./data/pbs_crontabs:/var/spool/cron/crontabs # this folder has a file which is crontab
+      - ./data/pbs_etc:/etc/proxmox-backup # keeps PBS important files on host
+      - ./data/pbs_logs:/var/log/proxmox-backup # keeps PBS important files on host
+      - ./data/pbs_lib:/var/lib/proxmox-backup # keeps PBS important files on host
+      - /etc/localtime:/etc/localtime:ro # set datetime from host to docker container
+    tmpfs:
+      - /run
+    cap_add: # smartctl support
+      - SYS_RAWIO
+    restart: unless-stopped
+    stop_signal: SIGHUP

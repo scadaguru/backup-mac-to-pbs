@@ -1,0 +1,4 @@
+# For more information see the manual pages of crontab(5) and cron(8)
+# m h  dom mon dow   command
+
+*/2 * * * * /home/custom_cronjobs/backup-mac-to-pbs.sh >> /home/custom_cronjobs/backup.log 2>&1

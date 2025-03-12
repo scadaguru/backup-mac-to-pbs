@@ -1,0 +1,6 @@
+data/pbs_etc/
+data/pbs_lib/
+data/pbs_logs/
+**/.DS_Store
+last-ran-*
+backup.log
