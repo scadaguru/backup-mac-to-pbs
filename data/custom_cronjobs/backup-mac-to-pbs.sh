@@ -2,20 +2,18 @@
 
 # Following two will stay same for all VMs
 cur_folder="/home/custom_cronjobs/"
-log_file=$cur_folder/backup.log
 backup_marker=$cur_folder"last-ran-backup"
-
-echo "" # for newline in the log!
 
 # first check if backup was done today/date
 if [[ $(date -r $backup_marker +%Y-%m-%d) == $(date +%Y-%m-%d) ]]; then
-  echo `date +%Y-%m-%d" "%H:%M:%S`": The backup was created earlier for today's date, so ignoring: "
+  # `date +%Y-%m-%d" "%H:%M:%S`": The backup was created earlier for today's date, so ignoring: "
   exit -1
 fi
 # now create the marker file to prevent the same day backup
 touch $backup_marker;
 
 # run the backup now
+echo "" # for newline in the log!
 echo `date +%Y-%m-%d" "%H:%M:%S`": About to start the backup"
 
 # update below 3 lines variables for your environment, if you don't know how to then follow Proxmox documentation: https://pbs.proxmox.com/docs/backup-client.html

@@ -30,5 +30,5 @@ This container/script combo lets you back up your Mac OS Machine to Proxmox Back
     docker compose up -d --force-recreate
     ```
 # Notes:
-- This will run a backup hourly using crontab but will only do one backup per day
-    - cronjob runs hourly in case if your machine was sleeping/off
+- This will do daily one backup using cronjob, in case if Mac was on sleep/off mode then it will be done within 15 minutes after it wakes up 
+    - cronjob runs every 15 minutes in case if your Mac was sleeping/off
