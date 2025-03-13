@@ -13,7 +13,7 @@ This container/script combo lets you back up your Mac OS Machine to Proxmox Back
     ```
     - /Volumes/Data/work/another-python:/backup
     ```
-    - Update the hostname. This is what will show on the Proxmox Backup Server UI
+    - Update the `hostname`. This is what will show on the Proxmox Backup Server UI
     ```
     hostname: mbp-14
     ```
