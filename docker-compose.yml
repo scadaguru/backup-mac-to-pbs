@@ -4,6 +4,7 @@
 services:
   backup-mac-to-pbs:
     container_name: backup-mac-to-pbs
+    hostname: mbp-14
     image: ayufan/proxmox-backup-server:${TAG:-latest}
     ports:
       - 8007:8007

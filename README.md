@@ -1,28 +1,34 @@
 # backup-mac-to-pbs
-Do backup of your MAC OS to Proxmox Backup Server
+This container/script combo lets you back up your Mac OS Machine to Proxmox Backup Server
 
-## This repo will allow you to do backup of your MAC OS to Proxmox Backup Server.
-### You will need:
-- Proxmox Backup Server installed and running somewhere in your network
-- You will need a MAC device to backup of it's folder to the Proxmox Backup Server
-- Your MAC must have Docker Desktop offical application installed
+# What you need
+- Proxmox Backup Server installed and running on your network
+- You will need a Mac device to back up
+- Your Mac must have [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/) installed
 
-### Clone this repo and update follwing files
-- docker-compose.yaml line #13 shown below:
-    Make changes on the left side to point your folder that you want to get backup of, no changes need on the right side.
+# Process
+- Clone this repo and update follwing files
+- `docker-compose.yaml`
+    - Update your local path (left of `:`) to include the directory you want to backup. No changes need on the right side.
     ```
     - /Volumes/Data/work/another-python:/backup
     ```
-- backup-mac-to-pbs.sh line #22 to #25 shwon below by assigning the proper values:
-  if you don't know how to then follow Proxmox documentation: https://pbs.proxmox.com/docs/backup-client.html
+    - Update the `hostname`. This is what will show on the Proxmox Backup Server UI
+    ```
+    hostname: mbp-14
+    ```
+- `backup-mac-to-pbs.sh`
+    - Update the values below
+    - More info on these variables can be found on the [Proxmox Docuementation](https://pbs.proxmox.com/docs/backup-client.html)
     ```
     export PBS_REPOSITORY=
     export PBS_PASSWORD=
     export PBS_FINGERPRINT=
     ```
-- using terminal CD to that folder run the following command
+- Start the container. Navigate to this director on Terminal and run the following
     ```
     docker compose up -d --force-recreate
     ```
-### Notes:
-- This will run backup at every hour using crontab but will do only one backup per day, cronjob runs hourly in case if your MAC was sleeping or not on so it will get backuped next hour if it is still on once a day
+# Notes:
+- This will run a backup hourly using crontab but will only do one backup per day
+    - cronjob runs hourly in case if your machine was sleeping/off
