@@ -13,6 +13,10 @@ This container/script combo lets you back up your Mac OS Machine to Proxmox Back
     ```
     - /Volumes/Data/work/another-python:/backup
     ```
+    - Update the hostname. This is what will show on the Proxmox Backup Server UI
+    ```
+    hostname: mbp-14
+    ```
 - `backup-mac-to-pbs.sh`
     - Update the values below
     - More info on these variables can be found on the [Proxmox Docuementation](https://pbs.proxmox.com/docs/backup-client.html)
