@@ -9,8 +9,6 @@ if [[ $(date -r $backup_marker +%Y-%m-%d) == $(date +%Y-%m-%d) ]]; then
   # `date +%Y-%m-%d" "%H:%M:%S`": The backup was created earlier for today's date, so ignoring: "
   exit -1
 fi
-# now create the marker file to prevent the same day backup
-touch $backup_marker;
 
 # run the backup now
 echo "" # for newline in the log!
@@ -24,6 +22,14 @@ export PBS_FINGERPRINT=
 proxmox-backup-client backup root.pxar:/backup
 # if you want you can specify the NAMESPACE (--ns) and backup-id (--backup-id) if configured on Proxmox Backup Server
 # proxmox-backup-client backup root.pxar:/backup --ns host --backup-id "mac-mini4"
+if [ $? -ne 0 ]; then 
+  echo `date +%Y-%m-%d" "%H:%M:%S`": **********************"; 
+  echo `date +%Y-%m-%d" "%H:%M:%S`": *** Backup failed! ***"; 
+  echo `date +%Y-%m-%d" "%H:%M:%S`": **********************"; 
+else
+  # now create the marker file to prevent the same day backup
+  touch $backup_marker;
+fi
 
 # no changes needed below 3 lines!
 export PBS_REPOSITORY=
